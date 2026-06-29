@@ -22,18 +22,18 @@ API RESTful desenvolvida como projeto final para a disciplina de **Fundamentos d
 ## 🗂️ Estrutura do Projeto
 - expodesign/
 - api/
-  - main.py
-  - db.py
-  - models.py
   - crud_projeto.py
+  - db.py
+  - main.py
+  - models.py
+  - requirements.txt
 - banco/
   - 01-criacao-tabelas.sql
   - 02-povoamento.sql
   - 03-visoes.sql
   - 04-perfis-usuarios.sql
 - .gitignore
-- requirements.txt
-- .env.example
+- LICENSE
 - README.md
 
 ---
