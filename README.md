@@ -94,8 +94,10 @@ cd api-expodesign
 # 4. Entre na pasta da API
 cd api
 
-# 5. Instale as dependências
+# 5. Instale as dependências (tendo o Python 3.14 já instalado)
 pip install -r requirements.txt
+# Ou, se não funcionar
+python -m pip install -r requirements.txt
 
 # 6. Configure o .env
 crie um arquivo .env e adicione lá DB_PASSWORD = sua_senha_linda_do_postgres
