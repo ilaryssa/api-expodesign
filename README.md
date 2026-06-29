@@ -147,3 +147,6 @@ Este projeto foi desenvolvido exclusivamente para fins acadêmicos na disciplina
 
 ## 📚 Disciplina
 Fundamentos de Banco de Dados (FBD) — Curso de Design Digital — UFC — 2026
+
+## 📝 Licença
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
