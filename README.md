@@ -31,6 +31,7 @@ API RESTful desenvolvida como projeto final para a disciplina de **Fundamentos d
   - 02-povoamento.sql
   - 03-visoes.sql
   - 04-perfis-usuarios.sql
+- .gitignore
 - requirements.txt
 - .env.example
 - README.md
@@ -81,7 +82,7 @@ git clone https://github.com/seu-usuario/api-expodesign.git
 # 2. Instale as dependências
 pip install -r requirements.txt
 
-# 3. Configure o .env
+# 3. Configure o .env //  dentro da pasta api/
 cp .env.example .env
 # Edite com sua senha do PostgreSQL
 
