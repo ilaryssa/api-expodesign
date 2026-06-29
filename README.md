@@ -79,20 +79,31 @@ E as views:
 # 1. Clone o repositório
 git clone https://github.com/seu-usuario/api-expodesign.git
 
-# 2. Instale as dependências
+# 2. Acesse a pasta do projeto
+cd api-expodesign
+
+# 3. Execute os scripts SQL na ordem (pasta banco/)
+# No pgAdmin, execute os arquivos na seguinte ordem:
+#    01-criacao-tabelas.sql
+#    02-povoamento.sql
+#    03-visoes.sql
+#    04-perfis-usuarios.sql
+# (copie e cole cada um, ou use o "Query Tool" para rodar cada arquivo)
+
+# 4. Entre na pasta da API
+cd api
+
+# 5. Instale as dependências
 pip install -r requirements.txt
 
-# 3. Configure o .env //  dentro da pasta api/
+# 6. Configure o .env
 cp .env.example .env
 # Edite com sua senha do PostgreSQL
 
-# 4. Execute os scripts SQL no pgAdmin
-# (criação de tabelas, povoamento, views e perfis)
+# 7. Rode a API
+python -m uvicorn main:app --reload
 
-# 5. Rode a API
-python -m uvicorn main:app --reload (ou opções parecidas)
-
-# 6. Acesse a documentação
+# 8. Acesse a documentação
 # http://localhost:8000/docs
 ```
 ## 🧪 Testando
