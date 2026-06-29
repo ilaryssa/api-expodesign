@@ -97,8 +97,7 @@ cd api
 pip install -r requirements.txt
 
 # 6. Configure o .env
-cp .env.example .env
-# Edite com sua senha do PostgreSQL
+crie um arquivo .env e adicione lá DB_PASSWORD = sua_senha_linda_do_postgres
 
 # 7. Rode a API
 python -m uvicorn main:app --reload
