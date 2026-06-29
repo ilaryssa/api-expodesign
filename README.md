@@ -142,13 +142,13 @@ WHERE matricula = '202401';
 Este projeto foi desenvolvido exclusivamente para fins acadêmicos na disciplina de Fundamentos de Banco de Dados. Não é um sistema pronto para produção.
 
 ## 👩‍💻 Autores
-#### Daniely Maia — Estudante de Engenharia de Software na Universidade Federal do Ceará (UFC)
-#### Lara Gurgel — Estudante de Design Digital na Universidade Federal do Ceará (UFC)
-#### Laryssa Santos — Estudante de Design Digital na Universidade Federal do Ceará (UFC)
-#### Natan Oliveira — Estudante de Design Digital na Universidade Federal do Ceará (UFC)
+- [**Daniely Maia**](https://github.com/daniely-maia) — Estudante de Engenharia de Software na Universidade Federal do Ceará (UFC)
+- [**Lara Gurgel**](https://github.com/laralara1116) — Estudante de Design Digital na Universidade Federal do Ceará (UFC)
+- [**Laryssa Santos**](https://github.com/ilaryssa) — Estudante de Design Digital na Universidade Federal do Ceará (UFC)
+- [**Natan Oliveira**](https://github.com/henrii089) — Estudante de Design Digital na Universidade Federal do Ceará (UFC)
 
 ## 📚 Disciplina
-Fundamentos de Banco de Dados (FBD) — Curso de Design Digital — UFC — 2026
+Fundamentos de Banco de Dados (FBD) — Universidade Federal do Ceará (UFC) - Campus Quixadá — 2026
 
 ## 📝 Licença
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
