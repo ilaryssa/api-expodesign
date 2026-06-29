@@ -62,39 +62,29 @@ async def listar_projetos():
         ) for p in rows
     ]
 
-@router.delete("/projeto/{codigo_proj}")
-async def deletar_projeto(codigo_proj: int):
+@router.get("/projeto/{codigo_proj}", response_model=Projeto)
+async def get_projeto(codigo_proj: int):
     conn = get_connection()
     cur = conn.cursor()
 
-    try:
-        cur.execute("SELECT 1 FROM projeto WHERE codigo_proj = %s", (codigo_proj, )) #o projeto existe?
-        if cur.fetchone() is None:
-            raise HTTPException(404, "Projeto não encontrado")
-        
-        #precisa deletar coisa por coisa quando é FK
-        cur.execute("DELETE FROM trabalho_em_equipe WHERE codigo_proj = %s", (codigo_proj,)) #apagar da tabela trabalho em equipe quando apagar de projeto
-        cur.execute("DELETE FROM ferr_proj WHERE codigo_proj = %s", (codigo_proj,))
+    cur.execute("SELECT codigo_proj, titulo, descricao, ano, matricula, codigo_disc FROM projeto WHERE codigo_proj = %s", (codigo_proj, ))
+    p = cur.fetchone() #fetchone pra pegar um so
 
-        cur.execute("SELECT codigo_galeria FROM galeria WHERE codigo_proj = %s", (codigo_proj,))
-        galerias = cur.fetchall()
-        for galeria in galerias:
-            cur.execute("DELETE FROM imagem_galeria WHERE codigo_galeria = %s", (galeria[0],))
-        
-        cur.execute("DELETE FROM galeria WHERE codigo_proj = %s", (codigo_proj,))
-        cur.execute("DELETE FROM projeto WHERE codigo_proj = %s", (codigo_proj,))
+    cur.close()
+    conn.close()
+
+    if p is None:
+        raise HTTPException(404, "Projeto não encontrado")
+
+    return Projeto(
+            codigo_proj=p[0],
+            titulo=p[1],
+            descricao=p[2],
+            ano=p[3],
+            matricula=p[4],
+            codigo_disc=p[5],
+        )
     
-        conn.commit()
-    
-    except Exception as e:
-        conn.rollback()
-        raise HTTPException(400, f"Erro ao deletar o projeto: {str(e)}")
-
-    finally:
-        cur.close()
-        conn.close()
-
-    return {"msg": "Projeto deletado com sucesso!"}
 
 @router.put("/projeto/{codigo_proj}") #put atualiza recursos existentes
 async def atualizar_projeto(codigo_proj: int, projeto_update: ProjetoUpdate): #pega o dnumero do departamento que vai ser atualizado e o objeto com os novos dados do departamentoUpdate
@@ -139,3 +129,37 @@ async def atualizar_projeto(codigo_proj: int, projeto_update: ProjetoUpdate): #p
         conn.close() #aqui, quando da tudo certo, fecha o cursor e a conexão com o banco de dados
 
     return {"msg": "Projeto atualizado com sucesso!"} 
+
+@router.delete("/projeto/{codigo_proj}")
+async def deletar_projeto(codigo_proj: int):
+    conn = get_connection()
+    cur = conn.cursor()
+
+    try:
+        cur.execute("SELECT 1 FROM projeto WHERE codigo_proj = %s", (codigo_proj, )) #o projeto existe?
+        if cur.fetchone() is None:
+            raise HTTPException(404, "Projeto não encontrado")
+        
+        #precisa deletar coisa por coisa quando é FK
+        cur.execute("DELETE FROM trabalho_em_equipe WHERE codigo_proj = %s", (codigo_proj,)) #apagar da tabela trabalho em equipe quando apagar de projeto
+        cur.execute("DELETE FROM ferr_proj WHERE codigo_proj = %s", (codigo_proj,))
+
+        cur.execute("SELECT codigo_galeria FROM galeria WHERE codigo_proj = %s", (codigo_proj,))
+        galerias = cur.fetchall()
+        for galeria in galerias:
+            cur.execute("DELETE FROM imagem_galeria WHERE codigo_galeria = %s", (galeria[0],))
+        
+        cur.execute("DELETE FROM galeria WHERE codigo_proj = %s", (codigo_proj,))
+        cur.execute("DELETE FROM projeto WHERE codigo_proj = %s", (codigo_proj,))
+    
+        conn.commit()
+    
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(400, f"Erro ao deletar o projeto: {str(e)}")
+
+    finally:
+        cur.close()
+        conn.close()
+
+    return {"msg": "Projeto deletado com sucesso!"}
