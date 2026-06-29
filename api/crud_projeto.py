@@ -111,7 +111,9 @@ async def atualizar_projeto(codigo_proj: int, projeto_update: ProjetoUpdate): #p
             cur.execute("UPDATE projeto SET titulo = %s WHERE codigo_proj = %s", (projeto_update.titulo, codigo_proj,))
         if projeto_update.descricao is not None and projeto_update.descricao != "string":
             cur.execute("UPDATE projeto SET descricao = %s WHERE codigo_proj = %s", (projeto_update.descricao, codigo_proj,))
-        if projeto_update.ano is not None:
+        if projeto_update.ano is not None and projeto_update.ano > 2015:
+            if projeto_update.ano < 2015:
+                raise HTTPException(400, "Ano válido somente a partir de 2015")
             cur.execute("UPDATE projeto SET ano = %s WHERE codigo_proj = %s", (projeto_update.ano, codigo_proj,))
         if projeto_update.matricula is not None and projeto_update.matricula != "string":
             cur.execute("UPDATE projeto SET matricula = %s WHERE codigo_proj = %s", (projeto_update.matricula, codigo_proj,))
@@ -119,6 +121,9 @@ async def atualizar_projeto(codigo_proj: int, projeto_update: ProjetoUpdate): #p
             cur.execute("UPDATE projeto SET codigo_disc = %s WHERE codigo_proj = %s", (projeto_update.codigo_disc, codigo_proj,))
         
         conn.commit() #avisar que deu bom
+    
+    except HTTPException: #roda as mensagens de erro antes da mensagem genérica
+        raise
 
     except Exception as e: 
         conn.rollback()
