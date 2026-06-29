@@ -83,6 +83,7 @@ git clone https://github.com/seu-usuario/api-expodesign.git
 cd api-expodesign
 
 # 3. Execute os scripts SQL na ordem (pasta banco/)
+# Nomeeie o banco como "expodesign" (caso queira usar outro nome, é preciso modificar o atributo dbname no arquivo api/db.py)
 # No pgAdmin, execute os arquivos na seguinte ordem:
 #    01-criacao-tabelas.sql
 #    02-povoamento.sql
@@ -105,8 +106,35 @@ python -m uvicorn main:app --reload
 # 8. Acesse a documentação
 # http://localhost:8000/docs
 ```
-## 🧪 Testando
-Acesse o Swagger em http://localhost:8000/docs para testar todos os endpoints interativamente.
+## 🧪 Testando a API
+
+Com a API rodando, acesse o Swagger em `http://localhost:8000/docs`.
+
+Por lá, é possível testar o fluxo completo do CRUD:
+
+- **Adicionar** um novo projeto via `POST /projeto`
+- **Consultar** a lista completa de projetos com `GET /projetos`
+- **Consultar** um projeto específico com `GET /projeto/{codigo_proj}`
+- **Modificar** o projeto usando `PUT /projeto/{codigo_proj}`
+- **Deletar** o projeto ao final com `DELETE /projeto/{codigo_proj}`
+
+Além disso, é possível consultar os dados diretamente no **pgAdmin** (ou no terminal do PostgreSQL) para verificar se as alterações foram refletidas no banco de dados.
+
+Exemplo de consulta SQL no pgAdmin:
+
+```sql
+-- Consultar todos os projetos
+SELECT * FROM projeto;
+
+-- Consultar projetos com filtros
+SELECT * FROM projeto 
+WHERE ano >= 2020 
+ORDER BY titulo;
+
+-- Consultar projetos de um autor específico
+SELECT * FROM projeto 
+WHERE matricula = '202401';
+```
 
 ## ⚠️ Aviso
 Este projeto foi desenvolvido exclusivamente para fins acadêmicos na disciplina de Fundamentos de Banco de Dados. Não é um sistema pronto para produção.
