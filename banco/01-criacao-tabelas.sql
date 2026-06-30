@@ -1,4 +1,4 @@
--- DDL: criação das tabelas
+	-- DDL: criação das tabelas
 -- DDL: disciplina, ferramenta, usuario
 
 create table disciplina (
