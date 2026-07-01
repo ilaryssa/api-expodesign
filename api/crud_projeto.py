@@ -97,15 +97,6 @@ async def atualizar_projeto(codigo_proj: int, projeto_update: ProjetoUpdate): #p
         if cur.fetchone() is None:
             raise HTTPException(400, "Projeto não encontrado")
         
-        if projeto_update.matricula is not None and projeto_update.matricula != "string": #verifica se a matricula foi enviada e nao é o placeholder "string"
-            cur.execute("SELECT 1 FROM autor WHERE matricula = %s", (projeto_update.matricula,)) #se foi enviada, verifica se tem em autor
-            if cur.fetchone() is None:
-                raise HTTPException(400, "Matrícula não encontrada")
-        if projeto_update.codigo_disc is not None and projeto_update.codigo_disc != "string": #verifica se foi enviado e nao é o placeholder "string"
-            cur.execute("SELECT 1 FROM disciplina WHERE codigo_disc = %s", (projeto_update.codigo_disc,)) #se foi enviada, verifica se tem em disciplina
-            if cur.fetchone() is None:
-                raise HTTPException(400, "Disciplina não encontrada")
-        
         #verifica se cada campo do json veio e se não é "string"
         if projeto_update.titulo is not None and projeto_update.titulo != "string":
             cur.execute("UPDATE projeto SET titulo = %s WHERE codigo_proj = %s", (projeto_update.titulo, codigo_proj,))
